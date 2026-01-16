@@ -15,7 +15,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none; /* NOTE: Remove this line if you want the default mouse pointer back */
+    cursor: none; /* Custom cursor active */
 }
 
 html {
@@ -165,7 +165,7 @@ h1, h2, h3 {
 }
 
 .hero-content h1 {
-    font-size: 4rem; /* Adjusted for mobile safety */
+    font-size: 4rem;
     line-height: 1;
     margin-bottom: 1rem;
     background: linear-gradient(45deg, #fff, #888);
@@ -235,11 +235,7 @@ h1, h2, h3 {
     justify-content: center;
     gap: 12px;
     padding: 1rem 3rem;
-    
-    /* Luxury Gold Gradient */
     background: linear-gradient(135deg, #d4af37 0%, #AA8A2E 100%);
-    
-    /* Text Styling */
     color: #050505; 
     font-family: var(--font-heading);
     font-weight: 900;
@@ -247,12 +243,8 @@ h1, h2, h3 {
     text-transform: uppercase;
     text-decoration: none;
     letter-spacing: 0.15em;
-    
-    /* Border & Glow */
     border: 1px solid #FFD700;
     box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-    
-    /* Animation */
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     position: relative;
     overflow: hidden;
@@ -313,7 +305,7 @@ h1, h2, h3 {
     margin: 0 auto;
 }
 
-/* --- GALLERY (The 3 Photos) --- */
+/* --- GALLERY --- */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -334,8 +326,7 @@ h1, h2, h3 {
     border-color: var(--gold);
 }
 
-/* Creative Grid Layout */
-.gallery-item:nth-child(1) { grid-column: 1 / 13; height: 300px; } /* Mobile */
+.gallery-item:nth-child(1) { grid-column: 1 / 13; height: 300px; }
 .gallery-item:nth-child(2) { grid-column: 1 / 13; height: 300px; }
 .gallery-item:nth-child(3) { grid-column: 1 / 13; height: 300px; }
 
@@ -345,43 +336,26 @@ h1, h2, h3 {
     .gallery-item:nth-child(3) { grid-column: 3 / 11; margin-top: -50px; z-index: 2; height: auto; }
 }
 
-.image-wrapper {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
+.image-wrapper { width: 100%; height: 100%; position: relative; }
 
 .gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 100%; height: 100%; object-fit: cover;
     filter: grayscale(100%) contrast(120%);
     transition: filter 0.5s;
     display: block;
 }
 
-.gallery-item:hover img {
-    filter: grayscale(0%) contrast(100%);
-}
+.gallery-item:hover img { filter: grayscale(0%) contrast(100%); }
 
 .overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 2rem;
+    position: absolute; bottom: 0; left: 0; width: 100%; padding: 2rem;
     background: linear-gradient(to top, #000, transparent);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.4s;
+    opacity: 0; transform: translateY(20px); transition: all 0.4s;
 }
 
-.gallery-item:hover .overlay {
-    opacity: 1;
-    transform: translateY(0);
-}
+.gallery-item:hover .overlay { opacity: 1; transform: translateY(0); }
 
-/* --- CONTACT --- */
+/* --- CONTACT (Updated for Stacking) --- */
 .contact-box {
     text-align: center;
     border: 1px solid rgba(212, 175, 55, 0.3);
@@ -389,15 +363,25 @@ h1, h2, h3 {
     background: rgba(255,255,255,0.02);
 }
 
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Gap between Phone and Email */
+    margin: 2rem 0;
+}
+
 .gold-link {
-    display: block;
+    display: inline-block;
     color: var(--gold);
     font-size: 1.2rem;
     text-decoration: none;
-    margin: 2rem 0;
     font-family: var(--font-heading);
     word-break: break-all;
+    transition: opacity 0.3s;
 }
+
+.gold-link:hover { opacity: 0.8; }
+.gold-link i { margin-right: 10px; }
 
 @media (min-width: 768px) {
     .gold-link { font-size: 2rem; }
@@ -438,7 +422,6 @@ footer {
     transform: translateY(0);
 }
 
-/* Mobile Nav Toggle Handling would go here if extending further */
 @media (max-width: 768px) {
     .nav-links { display: none; } 
 }
