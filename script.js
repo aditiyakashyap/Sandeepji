@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. Custom Cursor Logic ---
     const cursorDot = document.querySelector('[data-cursor-dot]');
     const cursorOutline = document.querySelector('[data-cursor-outline]');
-    const hoverLinks = document.querySelectorAll('a, .gallery-item, button');
+    
+    // Add 'a' tags, buttons, and gallery items to hover list
+    const hoverLinks = document.querySelectorAll('a, .gallery-item, button, .cta-btn, .insta-btn');
 
     window.addEventListener('mousemove', (e) => {
         const posX = e.clientX;
@@ -13,18 +15,18 @@ document.addEventListener('DOMContentLoaded', () => {
         cursorDot.style.left = `${posX}px`;
         cursorDot.style.top = `${posY}px`;
 
-        // Outline follows with slight delay (animation)
+        // Outline follows with slight delay
         cursorOutline.animate({
             left: `${posX}px`,
             top: `${posY}px`
         }, { duration: 500, fill: "forwards" });
     });
 
-    // Cursor Reactive State (Grow on hover)
+    // Cursor Reactive State
     hoverLinks.forEach(link => {
         link.addEventListener('mouseenter', () => {
             cursorOutline.classList.add('hovered');
-            cursorDot.style.opacity = '0'; // Hide dot when outline grows
+            cursorDot.style.opacity = '0'; 
         });
         link.addEventListener('mouseleave', () => {
             cursorOutline.classList.remove('hovered');
@@ -33,10 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // --- 2. Scroll Animation (Intersection Observer) ---
+    // --- 2. Scroll Animation ---
     const observerOptions = {
-        root: null,
-        rootMargin: '0px',
         threshold: 0.15 
     };
 
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('show-element');
-                observer.unobserve(entry.target); // Only animate once
+                observer.unobserve(entry.target); 
             }
         });
     }, observerOptions);
@@ -53,19 +53,18 @@ document.addEventListener('DOMContentLoaded', () => {
     hiddenElements.forEach((el) => observer.observe(el));
 
 
-    // --- 3. Simple Parallax Effect on Scroll ---
+    // --- 3. Parallax Effect ---
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
-        
-        // Parallax for Hero Text
         const heroContent = document.querySelector('.hero-content');
+        
         if (heroContent) {
             heroContent.style.transform = `translateY(${scrollY * 0.3}px)`;
             heroContent.style.opacity = 1 - (scrollY / 700);
         }
     });
 
-    // --- 4. Glitch Effect Trigger (Random) ---
+    // --- 4. Glitch Effect ---
     const glitchText = document.querySelector('.glitch-text');
     if(glitchText) {
         setInterval(() => {
