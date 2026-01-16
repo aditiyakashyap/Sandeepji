@@ -15,7 +15,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none; /* Hide default cursor for custom one */
+    cursor: none; /* NOTE: Remove this line if you want the default mouse pointer back */
 }
 
 html {
@@ -145,6 +145,7 @@ h1, h2, h3 {
     align-items: center;
     text-align: center;
     position: relative;
+    padding: 0 1rem;
 }
 
 .hero-section::before {
@@ -164,7 +165,7 @@ h1, h2, h3 {
 }
 
 .hero-content h1 {
-    font-size: 5rem;
+    font-size: 4rem; /* Adjusted for mobile safety */
     line-height: 1;
     margin-bottom: 1rem;
     background: linear-gradient(45deg, #fff, #888);
@@ -180,7 +181,23 @@ h1, h2, h3 {
     max-width: 600px;
 }
 
-/* Button Styling */
+@media (min-width: 768px) {
+    .hero-content h1 { font-size: 5rem; }
+}
+
+/* Button Group */
+.cta-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .cta-group { flex-direction: row; gap: 2rem; }
+}
+
+/* Button 1: Initiate Protocol */
 .cta-btn {
     display: inline-block;
     padding: 1rem 3rem;
@@ -209,6 +226,44 @@ h1, h2, h3 {
 }
 .cta-btn:hover::before {
     width: 100%;
+}
+
+/* Button 2: Instagram Luxury Button */
+.insta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 1rem 3rem;
+    
+    /* Luxury Gold Gradient */
+    background: linear-gradient(135deg, #d4af37 0%, #AA8A2E 100%);
+    
+    /* Text Styling */
+    color: #050505; 
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    
+    /* Border & Glow */
+    border: 1px solid #FFD700;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    
+    /* Animation */
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.insta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+    background: transparent; 
+    color: var(--gold); 
 }
 
 .scroll-indicator {
@@ -280,9 +335,15 @@ h1, h2, h3 {
 }
 
 /* Creative Grid Layout */
-.gallery-item:nth-child(1) { grid-column: 1 / 5; }
-.gallery-item:nth-child(2) { grid-column: 5 / 13; }
-.gallery-item:nth-child(3) { grid-column: 3 / 11; margin-top: -50px; z-index: 2; }
+.gallery-item:nth-child(1) { grid-column: 1 / 13; height: 300px; } /* Mobile */
+.gallery-item:nth-child(2) { grid-column: 1 / 13; height: 300px; }
+.gallery-item:nth-child(3) { grid-column: 1 / 13; height: 300px; }
+
+@media (min-width: 768px) {
+    .gallery-item:nth-child(1) { grid-column: 1 / 5; height: auto; }
+    .gallery-item:nth-child(2) { grid-column: 5 / 13; height: auto; }
+    .gallery-item:nth-child(3) { grid-column: 3 / 11; margin-top: -50px; z-index: 2; height: auto; }
+}
 
 .image-wrapper {
     width: 100%;
@@ -324,23 +385,29 @@ h1, h2, h3 {
 .contact-box {
     text-align: center;
     border: 1px solid rgba(212, 175, 55, 0.3);
-    padding: 4rem;
+    padding: 4rem 2rem;
     background: rgba(255,255,255,0.02);
 }
 
 .gold-link {
     display: block;
     color: var(--gold);
-    font-size: 2rem;
+    font-size: 1.2rem;
     text-decoration: none;
     margin: 2rem 0;
     font-family: var(--font-heading);
+    word-break: break-all;
+}
+
+@media (min-width: 768px) {
+    .gold-link { font-size: 2rem; }
 }
 
 .socials {
     display: flex;
     justify-content: center;
     gap: 2rem;
+    margin-top: 2rem;
 }
 
 .social-icon {
@@ -371,10 +438,7 @@ footer {
     transform: translateY(0);
 }
 
-/* Mobile Responsiveness */
+/* Mobile Nav Toggle Handling would go here if extending further */
 @media (max-width: 768px) {
-    .gallery-grid { display: flex; flex-direction: column; }
-    .hero-content h1 { font-size: 3rem; }
-    .gallery-item:nth-child(3) { margin-top: 0; }
-    .nav-links { display: none; } /* Add JS hamburger menu logic for full responsive */
+    .nav-links { display: none; } 
 }
